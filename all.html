@@ -35,16 +35,16 @@
     
     <main class="w-5/6 mx-auto my-14">
         <div class="flex gap-3 p-4 rounded-lg shadow">
-            <button class="btn btn-primary">All</button>
-            <button class="btn">Open</button>
-            <button class="btn">Close</button>
+            <button id="all-tab" onclick="show('all-tab')" class="btn btn-primary">All</button>
+            <button id="open-tab" onclick="show('open-tab')" class="btn">Open</button>
+            <button id="close-tab" onclick="show('close-tab')" class="btn">Close</button>
         </div>
 
-        <div class="flex justify-between items-center shadow mt-3 p-4">
+        <div class="top-section p-4 mt-4 flex justify-between items-center shadow">
             <div class="left flex gap-3">
                 <img class="flex-1 p-2 bg-[#ECE4FF] rounded-full" src="assets/Aperture.png" alt="">
                 <div>
-                    <h2 class="text-xl font-semibold"><span>50</span> Issues</h2>
+                    <h2 class="text-xl font-semibold"><span id="all-issues">0</span> Issues</h2>
                     <p class="text-sm text-[#64748B]">Track and manage your project issues</p>
                 </div>
             </div>
@@ -55,6 +55,18 @@
                 <h2>Closed</h2>
             </div>
         </div>
+
+        <div id="all-card-section" class="grid grid-cols-2 md:grid-cols-4 gap-3 p-4 shadow"> 
+            <div id="loadingSpinner" class="h-[60vh] justify-center items-center hidden">
+                <span class="loading loading-spinner loading-3xl"></span> 
+            </div> 
+        </div>
+
+        <div id="open-card-section" class="grid grid-cols-2 md:grid-cols-4 gap-3 p-4 shadow">   
+        </div>
+
+
+       
     </main>
 
     <script src="script/script.js"></script>
