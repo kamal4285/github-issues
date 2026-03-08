@@ -27,6 +27,14 @@ buttons.forEach(button => {
   });
 });
 
+const allTab = document.getElementById('all-tab');
+allTab.addEventListener('click', async function(){
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues`);
+    const data = await res.json();
+    const allTabShow = data.data.filter(item => item.status != '');
+    displayAll(allTabShow);
+})
+
 const openTab = document.getElementById('open-tab');
 openTab.addEventListener('click', async function(){
     const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues`);
@@ -46,11 +54,14 @@ const displayAll = (cards) => {
     const allCardSection = document.getElementById('all-card-section');
     allCardSection.innerHTML = '';
     for(let card of cards){
-        
+        if (card.status === "open") {
+            borderColor = 'border-green-500';
+        } else {
+            borderColor = 'border-purple-500';
+        }
         const allCard = document.createElement('div');
-       
         allCard.innerHTML = `
-            <div id="status-border" class="p-3 space-y-3 shadow border-t-4 h-full rounded-lg border-green-500">
+            <div id="status-border" class="p-3 space-y-3 shadow border-t-4 ${borderColor} h-full rounded-lg">
                 <div class="flex justify-between">
                     <img class="" src="assets/Open-Status.png" alt="">
                     <button class="bg-[#FEECEC] text-[#EF4444] py-0.5 px-5 rounded-full">${card.priority}</button>
@@ -67,14 +78,8 @@ const displayAll = (cards) => {
                 </div>
             </div>
         `;
-        // const statusB =document.getElementById('status-border');
-        // if(card.status === "closed"){
-        //     statusB.classList.remove('border-green-500');
-        //     statusB.classList.add('border-purple-500');
-        // }
-        allCardSection.append(allCard);
-        
+        allCardSection.append(allCard); 
     }
+    //getIssues()
     calculateCount();
 };
-
