@@ -56,19 +56,28 @@ const displayAll = (cards) => {
     for(let card of cards){
         if (card.status === "open") {
             borderColor = 'border-green-500';
-        } else {
+            icon ='<img src="assets/Open-Status.png" alt="">';
+        }else {
             borderColor = 'border-purple-500';
+            icon ='<img src="assets/Closed- Status .png" alt="">';
+        }
+        if(card.priority === "high"){
+            priorityBtn = 'bg-[#FEECEC] text-[#EF4444]';
+        }else if(card.priority === "medium"){
+            priorityBtn = 'bg-[#FFF6D1] text-[#F59E0B]'
+        }else if(card.priority === "low"){
+            priorityBtn ='bg-[#EEEFF2] text-[#9CA3AF]';
         }
         const allCard = document.createElement('div');
         allCard.innerHTML = `
             <div id="status-border" class="p-3 space-y-3 shadow border-t-4 ${borderColor} h-full rounded-lg">
                 <div class="flex justify-between">
-                    <img class="" src="assets/Open-Status.png" alt="">
-                    <button class="bg-[#FEECEC] text-[#EF4444] py-0.5 px-5 rounded-full">${card.priority}</button>
+                    ${icon}
+                    <button class="${priorityBtn} py-0.5 px-5 rounded-full">${card.priority}</button>
                 </div>
                 <h2 class="text-sm font-semibold truncate">${card.title}</h2>
                 <h3 class="text-[12px] text-[#64748B] line-clamp-2">${card.description}</h3>
-                <div class="flex gap-4 justify-between">
+                <div class="flex sm:flex-col md:flex-row gap-4 justify-between">
                     <button class="bg-[#FEECEC] text-[#EF4444] border border-[#EF4444] py-0.5 px-2 rounded-full">${card.labels[0]}</button>
                     <button class="bg-[#FFF6D1] text-[#F59E0B] border border-[#F59E0B] py-0.5 px-2 rounded-full">${card.labels[1]}</button>
                 </div>

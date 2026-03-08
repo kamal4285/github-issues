@@ -19,7 +19,7 @@
 </head>
 <body>
     <nav>
-        <div class="navbar bg-base-100 shadow-sm p-6">
+        <div class="navbar flex flex-col sm:flex-row bg-base-100 shadow-sm p-6 space-y-7">
             <div class="flex flex-1 items-center gap-4">
                 <img class="h-10" src="assets/github-logo.png" alt="">
                 <h2 class="text-2xl font-bold">GitHub Issues Tracker</h2>
@@ -34,7 +34,7 @@
     </nav>
     
     <main class="w-5/6 mx-auto my-14">
-        <div class="flex gap-3 p-4 rounded-lg shadow">
+        <div class="flex flex-col sm:flex-row gap-3 p-4 rounded-lg shadow">
             <button id="all-tab"  class="btn btn-primary tab-btn">All</button>
             <button id="open-tab"  class="btn tab-btn">Open</button>
             <button id="close-tab"  class="btn tab-btn">Close</button>
@@ -56,12 +56,13 @@
             </div>
         </div>
 
-        <div id="all-card-section" class="grid grid-cols-2 md:grid-cols-4 gap-3 p-4 shadow"> 
+        <div id="all-card-section" class="grid grid-cols sm:grid-cols-3 md:grid-cols-4 gap-3 p-4 shadow"> 
             <div id="loadingSpinner" class="h-[60vh] justify-center items-center hidden">
                 <span class="loading loading-spinner loading-3xl"></span> 
             </div> 
         </div>
     </main>
+
 
     <script src="script/script.js"></script>
 </body>
