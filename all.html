@@ -25,9 +25,9 @@
                 <h2 class="text-2xl font-bold">GitHub Issues Tracker</h2>
             </div>
             <div class="flex gap-2">
-                <input type="text" placeholder="🔍 Search issues..." class="input input-bordered w-24 md:w-auto" />
+                <input type="text" placeholder="🔍 Search issues..." id="search-input" class="input input-bordered w-24 md:w-auto" />
                 <div>
-                    <button class="btn btn-primary">+ New Issues</button>
+                    <button id="search-btn" class="btn btn-primary">Search</button>
                 </div>
             </div>
         </div>
@@ -61,6 +61,12 @@
                 <span class="loading loading-spinner loading-3xl"></span> 
             </div> 
         </div>
+
+      
+<dialog id="my_modal_1" class="modal">
+  <div id="modal-box" class="modal-box">
+  </div>
+</dialog>
     </main>
 
 

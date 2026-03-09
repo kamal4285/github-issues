@@ -69,8 +69,9 @@ const displayAll = (cards) => {
             priorityBtn ='bg-[#EEEFF2] text-[#9CA3AF]';
         }
         const allCard = document.createElement('div');
+        allCard.className = "card-div";
         allCard.innerHTML = `
-            <div id="status-border" class="p-3 space-y-3 shadow border-t-4 ${borderColor} h-full rounded-lg">
+            <div id="status-border" onclick="openDetailsModal(${card.id})" class="p-3 space-y-3 shadow border-t-4 ${borderColor} h-full rounded-lg">
                 <div class="flex justify-between">
                     ${icon}
                     <button class="${priorityBtn} py-0.5 px-5 rounded-full">${card.priority}</button>
@@ -89,6 +90,56 @@ const displayAll = (cards) => {
         `;
         allCardSection.append(allCard); 
     }
-    //getIssues()
     calculateCount();
 };
+
+
+const detailsModal = document.getElementById('my_modal_1');
+async function openDetailsModal(id) {
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+    const data = await res.json();
+    const card = data.data;
+    const modalContent = document.getElementById('modal-box');
+    if(card.priority === "high"){
+            priorityBtn = 'bg-[#FEECEC] text-[#EF4444]';
+        }else if(card.priority === "medium"){
+            priorityBtn = 'bg-[#FFF6D1] text-[#F59E0B]'
+        }else if(card.priority === "low"){
+            priorityBtn ='bg-[#EEEFF2] text-[#9CA3AF]';
+        }
+    modalContent.innerHTML = `
+        <h1 class="text-2xl font-bold">${card.title}</h1>
+        <div class="flex gap-2 items-center">
+            <button class="py-0.5 px-2 rounded-full ${card.status === 'open' ? 'bg-green-500' : 'bg-purple-500'} text-white">
+                ${card.status}
+            </button>
+            <i class="fa-solid fa-circle"></i>
+            <p class="text-sm text-[#64748B]">Opened by ${card.author}</p>
+            <i class="fa-solid fa-circle"></i>
+            <p class="text-sm text-[#64748B]"> ${card.createdAt}</p>
+        </div>
+        <div class="flex gap-7 py-7">
+            <button class="bg-[#FEECEC] text-[#EF4444] border border-[#EF4444] py-0.5 px-2 rounded-full">${card.labels[0]}</button>
+            <button class="bg-[#FFF6D1] text-[#F59E0B] border border-[#F59E0B] py-0.5 px-2 rounded-full">${card.labels[1]}</button>
+        </div>
+        <p class="text-[#64748B] text-lg">${card.description}</p>
+        <div class="grid grid-cols-2 p-3 bg-[#F8FAFC] rounded-md mt-4">
+            <div>
+                <h3 class="text-[#64748B] text-lg">Assignee</h3>
+                <h2 >${card.author}</h2>
+            </div>
+            <div>
+                <h3 class="text-[#64748B] text-lg">Priority</h3>
+                <button class="${priorityBtn} text-red-600 py-0.5 px-5 rounded-full">${card.priority}</button>
+            </div>
+        </div>
+
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn btn-primary">Close</button>
+            </form>
+        </div>
+    `;
+
+    detailsModal.showModal();
+}
