@@ -143,3 +143,12 @@ async function openDetailsModal(id) {
 
     detailsModal.showModal();
 }
+
+
+const searchBtn = document.getElementById("search-btn");
+searchBtn.addEventListener("click", async () => {
+    const text = document.getElementById("search-input").value;
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${text}`);
+    const data = await res.json();
+    displayAll(data.data);
+});
